@@ -15,11 +15,11 @@ const transactionsRouter = Router();
 const upload = multer(uploadConfig);
 
 transactionsRouter.get('/', async (_request, response) => {
+  // call ListTransactionsService()
+
   const transactionRepository = getCustomRepository(TransactionsRepository);
 
-  const transactions = await transactionRepository.find({
-    relations: ['category'],
-  });
+  const transactions = await transactionRepository.find();
   const balance = await transactionRepository.getBalance();
 
   return response.json({ transactions, balance });
@@ -27,6 +27,9 @@ transactionsRouter.get('/', async (_request, response) => {
 
 transactionsRouter.post('/', async (request, response) => {
   const { title, value, type, category } = request.body;
+
+  // call CreateCategoriesService()
+  // call CreateTransactionService()
 
   const createTransaction = new CreateTransactionService();
 
@@ -55,6 +58,10 @@ transactionsRouter.post(
   upload.single('file'),
   async (request, response) => {
     const transactionsFilename = request.file.filename;
+
+    // call ParseCsvService()
+    // call CreateCategoriesService()
+    // call CreateTransactionService()
 
     const importTransactions = new ImportTransactionsService();
 
