@@ -57,6 +57,8 @@ transactionsRouter.post(
   '/import',
   upload.single('file'),
   async (request, response) => {
+    console.log(request.file);
+    //console.log(Buffer.from(request.file, 'base64').toString('ascii'));
     const transactionsFilename = request.file.filename;
 
     // call ParseCsvService()

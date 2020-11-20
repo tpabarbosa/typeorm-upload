@@ -2,7 +2,7 @@ import path from 'path';
 import multer from 'multer';
 import crypto from 'crypto';
 
-// import AppError from '../errors/AppError';
+import AppError from '../errors/AppError';
 
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
@@ -17,9 +17,11 @@ export default {
       return callback(null, fileName);
     },
   }),
-  /*
   fileFilter(_request, file, callback): unknown {
-    if (file.mimetype === 'text/csv') {
+    if (
+      file.mimetype === 'application/vnd.ms-excel' ||
+      file.mimetype === 'text/csv'
+    ) {
       callback(null, true);
     } else {
       callback(null, false);
@@ -27,5 +29,4 @@ export default {
     }
     return null;
   },
-  */
 };
